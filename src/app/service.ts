@@ -20,8 +20,10 @@ export class DataService {
     this.messages.next([...this.messages.getValue(), message]);
   }
 
-  sendMessage(data: string) {
-    this.message = new Message(data)
+  sendMessage(data: any) {
+    console.log(data)
+    this.message = new Message(data.message)
+    this.message.name=data.name
     this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
       .subscribe(response => {
         // this.addMessage({ sender: 'Chatbot', text: response.botResponse });
@@ -37,6 +39,7 @@ export class DataService {
     this.message = new Message(data)
     this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
       .subscribe(response => {
+        console.log(response);
         console.log(response.responseMessage)
         this.addMessage({ sender: 'Chatbot', text: response.responseMessage});
       }, error => {
