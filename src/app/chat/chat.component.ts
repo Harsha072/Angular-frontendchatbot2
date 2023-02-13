@@ -80,6 +80,10 @@ export class ChatComponent implements AfterViewChecked{
       window.alert("Cannot send empty message!");
     }
   }
+
+  ngOnDestroy() {
+  
+}
  
 
 }
