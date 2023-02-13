@@ -1,87 +1,120 @@
-
-<div class="container bootstrap snippets bootdeys">
-  <div>
-    <!-- Panel Chat -->
-    <div class="panel" id="chat">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <i class="icon wb-chat-text" aria-hidden="true"></i> PIXIE
-        </h3>
-      </div>
-      
-        <div class="panel-body">
+<div class="layout">
+  <div class="container bootstrap snippets bootdeys">
+    <div>
+      <!-- Panel Chat -->
+      <div class="panel" id="chat">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <i class="icon wb-chat-text" aria-hidden="true"></i> PIXIE
+          </h3>
+        </div>
+  
+        <div #chatContainer class="panel-body" >
           <div *ngIf="messageIntro.sender && messageIntro.text">
-          
-             <ng-container >
-            <div class="chat" >
-            
-              <div class="chat-avatar">
-                <a class="avatar avatar-online" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="June Lane">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
-                  <i></i>
-                </a>
-              </div>
-              <div class="chat-body">
-                <div class="chat-content">
-                  <p>
-                   {{messageIntro.text}}
-                  </p>
-                  <time class="chat-time" datetime="2015-07-01T11:37">11:37:08 am</time>
-                </div>
-              </div>
-            </div>
-            </ng-container>
-            <div *ngFor="let message of messages">
-              <ng-container *ngIf="message.sender === 'Chatbot'">
-                <div class="chat">
-                
-                  <div class="chat-avatar">
-                    <a class="avatar avatar-online" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="Edward Fletcher">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
-                      <i></i>
-                    </a>
-                  </div>
-                  <div class="chat-body">
-                    <div class="chat-content">
-                      <p>{{message.text}}</p>
-                      <time class="chat-time" datetime="2015-07-01T11:39">11:39:57 am</time>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-            <ng-container *ngIf="message.sender === 'User'">
-              <div class="chat chat-left">
-              
+  
+            <ng-container>
+              <div class="chat">
+  
                 <div class="chat-avatar">
-                  <a class="avatar avatar-online" data-toggle="tooltip" href="#" data-placement="left" title="" data-original-title="Edward Fletcher">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="...">
+                  <a class="avatar avatar-online" data-toggle="tooltip" href="#" data-placement="right" title=""
+                    data-original-title="June Lane">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
                     <i></i>
                   </a>
                 </div>
                 <div class="chat-body">
                   <div class="chat-content">
-                    <p>{{message.text}}</p>
-                    <time class="chat-time" datetime="2015-07-01T11:39">11:39:57 am</time>
+                    <p>
+                      {{messageIntro.text}}
+                    </p>
+                    <time class="chat-time" datetime="2015-07-01T11:37">{{time}}</time>
                   </div>
                 </div>
               </div>
             </ng-container>
+            <div *ngFor="let message of messages" >
+              <ng-container *ngIf="message.sender === 'Chatbot'">
+                <div class="chat">
+  
+                  <div class="chat-avatar">
+                    <a class="avatar avatar-online" data-toggle="tooltip" href="#" data-placement="left" title=""
+                      data-original-title="Edward Fletcher">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
+                      <i></i>
+                    </a>
+                  </div>
+                  <ng-container *ngIf="message.type; else elseBlock1">
+                      <div class="chat-body" >
+                        <div class="chat-content">
+                          <h5 class="text-center">{{message.question}}</h5>
+                          <div>
+                            <div class="option" *ngFor="let option of message.options">
+                              <input type="radio" id="{{option}}" name="options">
+                              <label for="{{option}}">{{option}}</label>
+                            </div>
+                          </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                          <time class="chat-time" datetime="2015-07-01T11:39">{{time}}</time>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-template #elseBlock1>
+                      <ng-container >
+                        <div class="chat-body"  >
+                          <div class="chat-content">
+                            <p>{{message.text}}</p>
+                            <time class="chat-time" datetime="2015-07-01T11:39">{{time}}</time>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </ng-template>
+  
+  
+  
+  
+                </div>
+              </ng-container>
+              <ng-container *ngIf="message.sender === 'User'">
+                <div class="chat chat-left">
+  
+                  <div class="chat-avatar" >
+                    <a class="avatar avatar-online" data-toggle="tooltip" href="#" data-placement="left" title=""
+                      data-original-title="Edward Fletcher">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="...">
+                      <i></i>
+                    </a>
+                  </div>
+                  <div class="chat-body" >
+                    <div class="chat-content">
+                      <p>{{message.text}}</p>
+                      <time class="chat-time" datetime="2015-07-01T11:39">{{time}}</time>
+                     
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
             </div>
-            
+  
           </div>
-          <div class="panel-footer">
-            <form>
-              <div class="input-group">
-                <input [(ngModel)]="inputValue" name="userinput" type="text" class="form-control" placeholder="Say something">
-                <span class="input-group-btn">
-                  <button   class="btn btn-primary" type="button" (keydown)="sendUserMessage()" (click)="sendUserMessage()">Send</button>
-                </span>
-              </div>
-            </form>
-          </div>
+          
         </div>
+  
+      </div>
       
+      <!-- End Panel Chat -->
     </div>
-    <!-- End Panel Chat -->
+    <br>
+       <div style="justify-content: center;" >
+        <form  class="panel-footer" >
+          <div class="input-group">
+            <input   [(ngModel)]="inputValue" name="userinput" type="text" class="form-control"
+              placeholder="Say something" (keyup.enter)="sendUserMessage()">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button"
+                (click)="sendUserMessage()">Send</button>
+            </span>
+          </div>
+        </form>
+       </div> 
   </div>
-  </div>
+
+</div>

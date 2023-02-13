@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService} from '../service';
 
 @Component({
@@ -6,25 +6,47 @@ import { DataService} from '../service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent implements AfterViewChecked{
+
+  @ViewChild('chatContainer', { static: false })
+  chatContainer!: ElementRef;
+
   messages:any= [];
   messageIntro:any={};
   inputValue!: string;
-  // messages: any[] = [
-  //   { text: 'Hello', sender: 'chatbot' },
-  //   { text: 'Hi there', sender: 'user' },
-  //   { text: 'How are you?', sender: 'chatbot' },
-  //   { text: 'I am fine, thanks', sender: 'user' },
-  // ];
+  options:any
+  time:string
+ 
 
 
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+    const date = new Date();
+    const options: Intl.DateTimeFormatOptions = {
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      hour: 'numeric',
+      minute: 'numeric',
+    
+    };
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    this.time = formatter.format(date);
+  }
+   
   ngOnInit() {
 
     this.introduce({name:'Welcome',message:'hi'})
  
   }
+  
+
+  ngAfterViewChecked() {
+    console.log("calling bottom")
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+}
 
   async introduce(event:any){
  await this.dataService.sendMessage(event)
@@ -48,6 +70,7 @@ export class ChatComponent {
       setTimeout(() => {
         console.log("send user::: ",response)
          this.messages = response
+        
        this.inputValue=''
       }, 1000);
      
