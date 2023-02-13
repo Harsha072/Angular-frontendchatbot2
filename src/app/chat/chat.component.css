@@ -1,13 +1,13 @@
 /* .message {
   width: 100%;
   flex-grow: 1;
-  } */
+  }
+  
   .message-container{
     display: inline;
   }
   .message-card {
-    display: flex;
-    flex-wrap: wrap;
+  
     width: fit-content;
     animation: slide-in-left 0.4s ease-out;
     background-color: bisque;
@@ -39,12 +39,216 @@
     width: 100%;
   }
   .input-container {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
   }
   #avatar{
     width: fit-content;
     flex-basis: 2%;
+   animation: slide-in-left 0.4s ease-out;
+    border-radius: 50%; 
+  width: 100px; 
+  height: 100px;
   }
+  .left {
+    float: left;
+   
+    padding: 10px;
+    margin: 10px;
+    clear: both;
+  }
+  
+  .right {
+    float: right;
+   
+    padding: 10px;
+    margin: 10px;
+    clear: both;
+  }
+  @media screen and (max-width: 500px) {
+  .chat-container {
+    height: 300px;
+    overflow-y: scroll;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 80%;
+   
+  }
+}
+  */
+  
+.panel-body{
+  
+  height: 650px;
+  overflow-y: scroll;
+  width: 100%; 
+  background-color: teal
+
+  }
+  
+  .chat-box {
+      height: 100%;
+      width: 100%;
+      background-color:black;
+      overflow: hidden
+
+  }
+  
+  .chats {
+      padding: 30px 15px;
+      background-color: lightgray;
+  }
+  
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+
+
+  .chat-avatar {
+      float: left
+  }
+  
  
+.chat-avatar .avatar {
+  width: 30px
+      -webkit-box-shadow  0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2),0 6px 10px 0 rgba(0,0,0,0.3);
+}
+
+  
+  .chat-body {
+      display: block;
+      margin: 10px 30px 0 0;
+      overflow: hidden
+  }
+  
+  .chat-body:first-child {
+      margin-top: 0
+  }
+  
+  /**for chat bot*/
+  .chat-content {
+      position: relative;
+      display: block;
+      float: left;
+      padding: 8px 15px;
+      margin: 0 20px 10px 0;
+      clear: both;
+      color: #fff;
+      background-color: #62a8ea;
+      border-radius: 4px;
+          -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+      box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+  }
+  
+  .chat-content:before {
+      position: absolute;
+      top: 10px;
+      right: -10px;
+      width: 0;
+      height: 0;
+      content: '';
+      border: 5px solid transparent;
+      border-left-color: #62a8ea
+  }
+  
+  .chat-content>p:last-child {
+      margin-bottom: 0
+  }
+  
+  .chat-content+.chat-content:before {
+      border-color: transparent
+  }
+  
+  .chat-time {
+      display: block;
+      margin-top: 8px;
+      color: black
+  }
+  
+  .chat-left .chat-avatar {
+      float: right
+  }
+  
+  .chat-left .chat-body {
+      margin-right: 0;
+      margin-left: 30px
+  }
+  
+  .chat-left .chat-content {
+      float: right;
+      margin: 0 0 10px 20px;
+      color: black;
+      background-color: white;
+  }
+  
+  .chat-left .chat-content:before {
+      right: auto;
+      left: -10px;
+      border-right-color: #dfe9ef;
+      border-left-color: transparent
+  }
+  
+  .chat-left .chat-content+.chat-content:before {
+      border-color: transparent
+  }
+  
+  .chat-left .chat-time {
+      color: black;
+  }
+  @media (max-width: 767px) {
+    .panel-footer {
+      flex-direction: column;
+   
+ }
+   
+  }
+  
+  .avatar img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border: 0 none;
+      border-radius: 1000px;
+  }
+  .chat-avatar .avatar {
+      width: 30px;
+  }
+  .avatar {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      white-space: nowrap;
+      border-radius: 1000px;
+      vertical-align: bottom;
+  }
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  input[type="radio"] {
+    margin-right: 10px;
+  }
+  /* .layout{
+    background-image: url("../../assets/images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 810px;
+  } */
