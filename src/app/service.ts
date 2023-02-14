@@ -15,7 +15,6 @@ export class DataService {
   currentMessages = this.messages.asObservable();
   message:any={}
   constructor(private http: HttpClient) { }
-
   addMessage(message: any) {
     this.messages.next([...this.messages.getValue(), message]);
   }
