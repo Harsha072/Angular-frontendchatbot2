@@ -19,8 +19,10 @@ export class DataService {
     this.messages.next([...this.messages.getValue(), message]);
   }
 
-  sendMessage(data: string) {
-    this.message = new Message(data)
+  sendMessage(data: any) {
+    console.log(data)
+    this.message = new Message(data.message)
+    this.message.name=data.name
     this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
       .subscribe(response => {
         // this.addMessage({ sender: 'Chatbot', text: response.botResponse });
@@ -36,8 +38,25 @@ export class DataService {
     this.message = new Message(data)
     this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
       .subscribe(response => {
+        console.log(response);
         console.log(response.responseMessage)
         this.addMessage({ sender: 'Chatbot', text: response.responseMessage});
+        // if(response.intent=='goodmood-quiz'||response.intent=='badmood-quiz'){
+        //   this.startQuiz()
+        // }
+      }, error => {
+        console.log(error);
+      });
+  }
+  startQuiz() {
+     console.log("start quiz");
+     this.http.get<Quiz>('http://localhost:3000/api/quiz/')
+      .subscribe(response => {
+        console.log(response);
+      
+         this.addMessage({ sender: 'Chatbot', question: response.question,answere:response.correctAnswer,options:response.incorrectAnswers
+        ,type:"quiz" });
+      
       }, error => {
         console.log(error);
       });
@@ -46,5 +65,11 @@ export class DataService {
 export interface BotMessage{
   "id":string,
   "responseMessage":string,
-  "originalQuery":string
+  "originalQuery":string,
+  "intent":string
+}
+export interface Quiz{
+  "question":string,
+  "incorrectAnswers":string,
+  "correctAnswer":string
 }
