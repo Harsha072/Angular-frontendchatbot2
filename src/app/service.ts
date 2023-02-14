@@ -19,11 +19,12 @@ export class DataService {
     this.messages.next([...this.messages.getValue(), message]);
   }
   sendMessage(data: any) {
-    
+
     console.log(data)
     this.message = new Message(data.message)
     this.message.name=data.name
-    this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
+    // this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
+    this.http.post<BotMessage>('https://chatbot-backend-g707.onrender.com/api/requestText', this.message)
       .subscribe(response => {
         // this.addMessage({ sender: 'Chatbot', text: response.botResponse });
         console.log(response.responseMessage)
@@ -36,6 +37,7 @@ export class DataService {
   sendUserMessage(data: string) {
     this.addMessage({ sender: 'User', text: data });
     this.message = new Message(data)
+    console.log("this.message ",this.message)
     this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
       .subscribe(response => {
         console.log(response);
