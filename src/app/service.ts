@@ -18,7 +18,6 @@ export class DataService {
   addMessage(message: any) {
     this.messages.next([...this.messages.getValue(), message]);
   }
-
   sendMessage(data: any) {
     console.log(data)
     this.message = new Message(data.message)
