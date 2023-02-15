@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export class Message{
   constructor(public requestText:String){}
@@ -23,8 +24,9 @@ export class DataService {
     console.log(data)
     this.message = new Message(data.message)
     this.message.name=data.name
-    // this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
-    this.http.post<BotMessage>('https://chatbot-backend-g707.onrender.com/api/requestText', this.message)
+    console.log("this::: ",this.message)
+    this.http.post<BotMessage>(`${environment.apiUrl}/requestText/`, this.message)
+    // this.http.post<BotMessage>('https://chatbot-backend-g707.onrender.com/api/requestText/', this.message)
       .subscribe(response => {
         // this.addMessage({ sender: 'Chatbot', text: response.botResponse });
         console.log(response.responseMessage)
