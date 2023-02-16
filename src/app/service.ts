@@ -40,7 +40,7 @@ export class DataService {
     this.addMessage({ sender: 'User', text: data });
     this.message = new Message(data)
     console.log("this.message ",this.message)
-    this.http.post<BotMessage>('http://localhost:3000/api/requestText/', this.message)
+    this.http.post<BotMessage>(`${environment.apiUrl}/requestText/`, this.message)
       .subscribe(response => {
         console.log(response);
         console.log(response.responseMessage)
