@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { ChatComponent } from './chat/chat.component';
 
-const routes: Routes = [];
+import { PreQuizComponent } from './pre-quiz/pre-quiz.component'; 
+
+
+const routes: Routes = [
+  { path: 'chat', component: ChatComponent },
+  { path: 'prequiz', component: PreQuizComponent },
+  { path: '', redirectTo:'/chat' ,pathMatch:'full' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

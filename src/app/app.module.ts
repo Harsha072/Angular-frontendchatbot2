@@ -11,12 +11,15 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 import {MatInputModule} from '@angular/material/input'
 import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button'
+import {MatButtonModule} from '@angular/material/button';
+import { PreQuizComponent } from './pre-quiz/pre-quiz.component'
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
+    PreQuizComponent,
   
   ],
   imports: [
@@ -29,8 +32,8 @@ import {MatButtonModule} from '@angular/material/button'
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    FormsModule
-    
+    FormsModule,
+   
 
     
    

@@ -1,5 +1,7 @@
 import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService} from '../service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-chat',
@@ -16,11 +18,12 @@ export class ChatComponent implements AfterViewChecked{
   inputValue!: string;
   options:any
   time:string
+
  
 
 
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,private router: Router) {
     const date = new Date();
     const options: Intl.DateTimeFormatOptions = {
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -37,7 +40,9 @@ export class ChatComponent implements AfterViewChecked{
     this.introduce({name:'Welcome',message:'hi'})
  
   }
-  
+  navigateToAbout() {
+    this.router.navigate(['/prequiz']);
+  }
 
   ngAfterViewChecked() {
     console.log("calling bottom")
@@ -47,6 +52,8 @@ export class ChatComponent implements AfterViewChecked{
   scrollToBottom() {
     this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
 }
+
+
 
   async introduce(event:any){
  await this.dataService.sendMessage(event)

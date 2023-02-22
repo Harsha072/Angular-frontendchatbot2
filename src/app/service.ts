@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-export class Message{
-  constructor(public requestText:String){}
+export class Message {
+  constructor(public requestText: String) { }
 }
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class DataService {
   private messages = new BehaviorSubject<Array<any>>([]);
   introMessage = this.messageIntro.asObservable();
   currentMessages = this.messages.asObservable();
-  message:any={}
+  message: any = {}
   constructor(private http: HttpClient) { }
   addMessage(message: any) {
     this.messages.next([...this.messages.getValue(), message]);
@@ -23,15 +23,15 @@ export class DataService {
 
     console.log(data)
     this.message = new Message(data.message)
-    this.message.name=data.name
-    console.log("this::: ",this.message)
+    this.message.name = data.name
+    console.log("this::: ", this.message)
     this.http.post<BotMessage>(`${environment.apiUrl}/requestText/`, this.message)
-    // this.http.post<BotMessage>('https://chatbot-backend-g707.onrender.com/api/requestText/', this.message)
+     
       .subscribe(response => {
-        // this.addMessage({ sender: 'Chatbot', text: response.botResponse });
+     
         console.log(response.responseMessage)
-        // this.addMessage({ "sender": 'Chatbot', "text": response.responseMessage});
-        this.messageIntro.next([...this.messageIntro.getValue(),{"sender":'Chatbot',"text":response.responseMessage}])
+     
+        this.messageIntro.next([...this.messageIntro.getValue(), { "sender": 'Chatbot', "text": response.responseMessage }])
       }, error => {
         console.log(error);
       });
@@ -39,41 +39,37 @@ export class DataService {
   sendUserMessage(data: string) {
     this.addMessage({ sender: 'User', text: data });
     this.message = new Message(data)
-    console.log("this.message ",this.message)
+    console.log("this.message ", this.message)
     this.http.post<BotMessage>(`${environment.apiUrl}/requestText/`, this.message)
       .subscribe(response => {
         console.log(response);
         console.log(response.responseMessage)
-        this.addMessage({ sender: 'Chatbot', text: response.responseMessage});
-        // if(response.intent=='goodmood-quiz'||response.intent=='badmood-quiz'){
-        //   this.startQuiz()
-        // }
+        this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
+   
       }, error => {
         console.log(error);
       });
   }
-  startQuiz() {
-     console.log("start quiz");
-     this.http.get<Quiz>('http://localhost:3000/api/quiz/')
-      .subscribe(response => {
-        console.log(response);
-      
-         this.addMessage({ sender: 'Chatbot', question: response.question,answere:response.correctAnswer,options:response.incorrectAnswers
-        ,type:"quiz" });
-      
-      }, error => {
-        console.log(error);
-      });
+
+  startQuiz(questionIndex: number): Observable<any> {
+    console.log("start quiz",questionIndex);
+    return this.http.get<any>(`http://localhost:8080/api/quiz-question/${questionIndex}`);
   }
+
+  getQuizLength(): Observable<any> {
+    console.log("get quiz length");
+    return this.http.get<any>(`http://localhost:8080/api/quiz-question`);
+  }
+
 }
-export interface BotMessage{
-  "id":string,
-  "responseMessage":string,
-  "originalQuery":string,
-  "intent":string
+export interface BotMessage {
+  "id": string,
+  "responseMessage": string,
+  "originalQuery": string,
+  "intent": string
 }
-export interface Quiz{
-  "question":string,
-  "incorrectAnswers":string,
-  "correctAnswer":string
+export interface Quiz {
+  "question": string,
+  "options": string[],
+  "correctAnswer": string
 }
