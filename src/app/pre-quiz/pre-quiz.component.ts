@@ -17,10 +17,15 @@ export class PreQuizComponent {
   pickOptionsModal = false
   questionLength: any
   currentQuestion: number = 0
+  selectedOption: any;
+  countdown: any;
+  countdownInterval: any;
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+  
     this.startQuiz(this.next)
+
     this.dataService.getQuizLength().subscribe(response => {
       console.log("ng on init ", response)
       this.questionLength = response.length
@@ -35,7 +40,12 @@ export class PreQuizComponent {
 
 
   }
+
+
+
+
   async startQuiz(questionIndex: number) {
+    this.startTimer(60);
     this.dataService.startQuiz(questionIndex)
       .subscribe(response => {
         console.log("quiz question in component :::: ",);
@@ -55,6 +65,49 @@ export class PreQuizComponent {
       });
 
   }
+  startTimer(seconds: number) {
+    this.countdown = seconds;
+    this.countdownInterval = setInterval(() => {
+      if (this.countdown > 0) {
+        this.countdown--;
+      } else {
+        this.submitAnswer();
+      }
+    }, 1000);
+  }
+  resetTimer() {
+    clearInterval(this.countdownInterval);
+    this.startTimer(60);
+  }
+  selectOption(answere: string) {
+    console.log("time ", this.countdown);
+    console.log("got answere", answere);
+    console.log("index of question ", this.next);
+  
+    this.dataService.startQuiz(this.next).subscribe(response => {
+      if (this.isOptionCorrect(answere, response.answer)) {
+        console.log("show green");
+        this.handleNextQuestion();
+      } else {
+        console.log("show red");
+        this.handleNextQuestion();
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  
+  isOptionCorrect(selectedOption: string, correctOption: string): boolean {
+    return selectedOption === correctOption;
+  }
+
+  submitAnswer() {
+    clearInterval(this.countdownInterval);
+    // Handle submitting the answer and moving to the next question
+    console.log("submitting the answere automatically::::: ")
+  this.handleNextQuestion()
+  }
+
   showRemaining(currentQuestion: number) {
     console.log("question length ", this.questionLength)
     console.log("current question ", currentQuestion)

@@ -22,7 +22,11 @@
     <div class="game-details-container">
       
         <h1>Question: <span id="question-number">{{ currentQuestion }}</span> / {{ questionLength }}</h1>
+        <div class="countdown-container">
+            <span> <h1>Time Remaining: {{ countdown }}</h1></span>
+          </div>
     </div>
+    
 
     <div class="game-question-container">
         <h1 id="display-question">{{question}}</h1>
@@ -42,11 +46,14 @@
             </div>
 
        </div>
-        <span  *ngFor="let option of options">
-            <input type="radio" id="option-one" name="option" class="radio" value="optionA" />
-            <label for="option-one" class="option" id="option-one-label">{{option}}</label>
-        </span>
-    
+       <span *ngFor="let option of options; let i = index">
+        <input #optionInput type="radio" name="selectedOption" [value]="option" (click)="selectOption(optionInput.value)" />
+        <!-- <label [ngClass]="{'green': , 'red': selectedOption === option && !isOptionCorrect(option)}">{{option}}</label> -->
+      </span>
+       <!-- <span *ngFor="let option of options; let i = index">
+        <input (click)="selectOption(option)" type="radio" name="selectedOption" [(ngModel)]="selectedOption" [value]="option" />
+        <label>{{option}}</label>
+      </span> -->
 
 
     </div>

@@ -1,0 +1,50 @@
+.navbar {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+  .nav-link:hover {
+    background-color: #333;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-nav.ml-auto {
+    margin-right: 0;
+  }
+  
+  .navbar-nav.ml-auto .nav-item {
+    margin-left: 10px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .navbar-collapse {
+      display: none;
+    }
+  }
+  
+  
+  
+  

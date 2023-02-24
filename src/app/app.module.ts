@@ -12,7 +12,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input'
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import { PreQuizComponent } from './pre-quiz/pre-quiz.component'
+import { PreQuizComponent } from './pre-quiz/pre-quiz.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component'
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +25,10 @@ import { PreQuizComponent } from './pre-quiz/pre-quiz.component'
     AppComponent,
     ChatComponent,
     PreQuizComponent,
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
   
   ],
   imports: [
@@ -33,6 +42,7 @@ import { PreQuizComponent } from './pre-quiz/pre-quiz.component'
     MatCardModule,
     MatButtonModule,
     FormsModule,
+    ReactiveFormsModule
    
 
     
