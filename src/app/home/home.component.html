@@ -1,12 +1,50 @@
-<div class="container">
+<div class="container" *ngIf="name$ | async as name ">
     <div class="row justify-content-center">
       <div class="col-10 text-center">
-        <p class="fs-1">This is a big paragraph.</p>
-        <button  class="btn btn-primary btn-lg" (click)="isAuthenticated()">Start Quiz</button>
+        <h1 class="fs-1">{{name}} Are you Ready to take the quiz</h1>
+        <div class="row justify-content-center">
+          <div class="container introduction-container">
+            <hr class="my-4">
+            <h3 class="display-4">Instructions on the quiz</h3>
+            <ul class="list-unstyled">
+              
+              <li>There are a set of 8 questions and each questions will be having four options to chose from.</li>
+              <li>All the questions are timed to 60 seconds</li>
+              <li>If you dont Answere a question you will move on to the next question automatically</li>
+            </ul>
+            
+        </div>
+          <button routerLink="/prequiz" type="button" class="btn btn-primary btn-lg" style="background-color: #0222af; border-color: #0222af;color: white;">Start Quiz</button></div>
+        
       </div>
-    </div>
+    </div> 
     <div *ngIf="showError" class="alert alert-danger alert-dismissible fade show" role="alert">
       Please login to access Quiz
       <button  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="reset()" ></button>
     </div>
-  </div>
+   </div> 
+  <div  *ngIf="!(name$ | async)">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="overlay"></div>
+        <div class="col-10 text-center">
+          <div class="container introduction-container">
+            <h1 class="display-4">Welcome to the Chatbot Quiz!</h1>
+            <p class="lead">We are conducting a study to find out whether human-like chatbot abilities improve learning. As a participant in this study, you will be interacting with a chatbot - which will help you learn about a certain topic - and answering a series of questions based on your conversations with them. 
+              Your responses will help us understand the impact of chatbot personality on learning outcomes.</p>
+            <hr class="my-4">
+            <h3 class="display-4">Heads Up!!!</h3>
+            <ul class="list-unstyled">
+              
+              <li>First you will be directed to a quiz where you will be asked questions about a programming language called Javascript which you will be taking before conversation with Chatbot.</li>
+              <li>Relax! You dont need to be a Computer Science genius to take this quiz. Even if you dont know the answere just take a guess.Or even if you score less, Doesnt matter to us.</li>
+              <li>You need to Login/Signup to take the quiz.</li>
+              <li>After taking the pre-quiz you have will a small chat with Robbie who will teach you about Javascript. </li>
+              <li>Then you will have the same test again to see if you have improved in your score or not.</li>
+              <li> Remember this is just a study/experiment being conducted and not a test on you programming abilities.  </li>
+            </ul>
+            
+        </div>
+      
+    </div>  
+    </div>

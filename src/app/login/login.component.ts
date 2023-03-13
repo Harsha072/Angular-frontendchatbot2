@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataService} from '../service';
 import { Router } from '@angular/router';
+import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
+import OktaAuth, { AuthState } from '@okta/okta-auth-js';
+import { filter, map, Observable } from 'rxjs';
 
 
 @Component({
@@ -10,28 +13,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent  implements OnInit{
-  form!: FormGroup;
-  
-  constructor(private formBuilder:FormBuilder,private dataService:DataService,private router:Router){
+ 
+  public isAuthenticated$!: Observable<boolean>;
+
+  constructor(private router:Router, private _oktaStateService: OktaAuthStateService, @Inject(OKTA_AUTH) private _oktaAuth: OktaAuth){
 
   }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      email: '',
-      password: ''
-    });
+    this.isAuthenticated$ = this._oktaStateService.authState$.pipe(
+      filter((s: AuthState) => !!s),
+      map((s: AuthState) => s.isAuthenticated ?? false)
+    );
+    console.log( this.isAuthenticated$)
   }
-  login(): void {
-    const user = this.form.getRawValue();
-    console.log(user);
-    this.dataService.login(user).subscribe(response=>{
-      this.router.navigate([''])
-      console.log("::::login:::: ",response)
-    },
-    (error)=>{
-      console.log(error)
-    });
+  public async signIn(): Promise<void> {
+    console.log("click sign in::::")
+    await this._oktaAuth.signInWithRedirect().then(
+      _ => this.router.navigate(['/register'])
+    );
+    console.log( this.isAuthenticated$)
+    
+  }
+  public async signOut(): Promise<void> {
+    await this._oktaAuth.signOut();
   }
 
 }

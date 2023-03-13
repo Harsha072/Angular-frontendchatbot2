@@ -44,7 +44,15 @@ export class DataService {
       .subscribe(response => {
         console.log(response);
         console.log(response.responseMessage)
-        this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
+        console.log(response.url)
+        // this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
+        if (response.url) {
+          this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
+          this.addMessage({ sender: 'Chatbot', text: response.url, isGif: true });
+        } else {
+          this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
+        }
+      
 
       }, error => {
         console.log(error);
@@ -58,12 +66,12 @@ export class DataService {
   }
   login(user: any): Observable<any> {
     console.log("calling login",user)
-    return this.http.post<any>(`http://localhost:8080/api/login`, user,{withCredentials:true})
+    return this.http.post<any>(`http://localhost:8080/api/login`, user)
 
   }
-  logout(): Observable<any> {
+  logout(user: any): Observable<any> {
     console.log("calling logout")
-    return this.http.post<any>(`http://localhost:8080/api/logout`, {},{withCredentials:true})
+    return this.http.post<any>(`http://localhost:8080/api/logout`, user)
 
   }
   startQuiz(questionIndex: number): Observable<any> {
@@ -75,17 +83,18 @@ export class DataService {
     console.log("get quiz length");
     return this.http.get<any>(`http://localhost:8080/api/quiz-question`);
   }
-
-  checkAuthentication(): Observable<any>{
-    return this.http.get<any>(`http://localhost:8080/api/user`,{withCredentials:true});
-  }
+prequizScore(score:any):Observable<any>
+{
+  return this.http.post<any>(`http://localhost:8080/api/prequiz`,score);
+} 
 
 }
 export interface BotMessage {
   "id": string,
   "responseMessage": string,
   "originalQuery": string,
-  "intent": string
+  "intent": string,
+  "url":string
 }
 export interface Quiz {
   "question": string,

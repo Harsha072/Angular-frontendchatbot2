@@ -1,24 +1,7 @@
-<div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card my-5">
+<ng-container *ngIf="(isAuthenticated$ | async) === false; else signout">
+  <button (click)="signIn()"> Sign in </button>
+</ng-container>
 
-          <form [formGroup]="form" class="card-body cardbody-color p-lg-5" (submit)="login()">
-
-            
-
-            <div class="mb-3">
-              <input formControlName="email" type="text" class="form-control" id="email" aria-describedby="emailHelp"
-                placeholder="email">
-            </div>
-            <div class="mb-3">
-              <input formControlName="password" type="password" class="form-control" id="password" placeholder="password">
-            </div>
-            <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">Login</button></div>
-            
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </div>
+<ng-template #signout>
+  <button (click)="signOut()">Sign out</button>
+</ng-template>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DataService} from '../service';
-import { Router } from '@angular/router';
-
+import { OktaAuthStateService } from '@okta/okta-angular';
+import { filter, map, Observable } from 'rxjs';
+import { AuthState } from '@okta/okta-auth-js';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,29 +9,19 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  form!: FormGroup;
-  
-  constructor(private formBuilder:FormBuilder,private dataService:DataService,private router:Router){
+ 
+  public name$!: Observable<string>;
+
+  constructor(private _oktaAuthStateService: OktaAuthStateService) { }
+
+  public ngOnInit(): void {
+    this.name$ = this._oktaAuthStateService.authState$.pipe(
+      filter((authState: AuthState) => !!authState && !!authState.isAuthenticated),
+      map((authState: AuthState) => authState.idToken?.claims.name ?? '')
+    );
 
   }
 
-  ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      username: '',
-      email: '',
-      password: ''
-    });
-  }
-
-  submit(): void {
-    const user = this.form.getRawValue();
-    console.log(user);
-    this.dataService.createUser(user).subscribe(()=>{
-       this.router.navigate(['/login'])
-    },
-    (error)=>{
-      console.log(error)
-    });
-  }
+ 
 
 }

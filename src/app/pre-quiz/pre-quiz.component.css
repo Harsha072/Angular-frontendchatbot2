@@ -188,6 +188,13 @@ input[type=radio]:checked ~ .option {
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
   }
+  .correct {
+    background-color: green;
+  }
+  
+  .wrong {
+    background-color: red;
+  }
 
 /* .modal-container{
     display: flex;

@@ -29,8 +29,8 @@ export class ChatComponent implements AfterViewChecked{
       timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       hour: 'numeric',
       minute: 'numeric',
-    
     };
+    
     const formatter = new Intl.DateTimeFormat('en-US', options);
     this.time = formatter.format(date);
   }

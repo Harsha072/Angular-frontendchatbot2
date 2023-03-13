@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
 import { HomeComponent } from './home/home.component';
@@ -10,12 +11,14 @@ import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
-  
-  { path: 'chat', component: ChatComponent },
-  { path: 'prequiz', component: PreQuizComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'chat', component: ChatComponent , canActivate:[OktaAuthGuard]},
+  { path: 'prequiz', component: PreQuizComponent, canActivate:[OktaAuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component:RegisterComponent },
-  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'login/callback', component: OktaCallbackComponent },
+  { path: 'register', component: RegisterComponent },
+  // { path: '', component: HomeComponent, pathMatch: 'full' },
   
 ];
 

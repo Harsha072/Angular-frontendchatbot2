@@ -18,7 +18,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component'
 import { ReactiveFormsModule } from '@angular/forms';
-
+import OktaAuth from '@okta/okta-auth-js';
+import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
+const oktaAuth = new OktaAuth({
+  issuer: 'https://dev-21147924.okta.com/oauth2/default',
+  clientId: '0oa8hhf2xrNtfp6AT5d7',
+  redirectUri: window.location.origin+'/login/callback'
+});
 
 @NgModule({
   declarations: [
@@ -42,13 +48,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OktaAuthModule
    
 
     
    
   ],
-  providers: [DataService],
+  providers: [DataService,{ provide: OKTA_CONFIG, useValue: { oktaAuth } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
