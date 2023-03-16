@@ -62,10 +62,15 @@
                       </div>
                     </ng-container>
                     <ng-template #elseBlock1>
-                      <ng-container >
-                        <div class="chat-body"  >
+                      <ng-container>
+                        <div class="chat-body">
                           <div class="chat-content">
-                            <p>{{message.text}}</p>
+                            <ng-container *ngIf="message.isGif">
+                              <img src="{{message.text}}" alt="gif">
+                            </ng-container>
+                            <ng-container *ngIf="!message.isGif">
+                              <p>{{message.text}}</p>
+                            </ng-container>
                             <time class="chat-time" datetime="2015-07-01T11:39">{{time}}</time>
                           </div>
                         </div>

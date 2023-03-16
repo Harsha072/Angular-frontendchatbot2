@@ -66,7 +66,7 @@ export class DataService {
   }
   login(user: any): Observable<any> {
     console.log("calling login",user)
-    return this.http.post<any>(`http://localhost:8080/api/login`, user)
+    return this.http.post<any>(`http://localhost:8080/api/login`, user,{ withCredentials: true })
 
   }
   logout(user: any): Observable<any> {
@@ -74,6 +74,10 @@ export class DataService {
     return this.http.post<any>(`http://localhost:8080/api/logout`, user)
 
   }
+  userInfo():Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/api/userinfo`,{ withCredentials: true })
+  }
+  
   startQuiz(questionIndex: number): Observable<any> {
     console.log("start quiz", questionIndex);
     return this.http.get<any>(`http://localhost:8080/api/quiz-question/${questionIndex}`);

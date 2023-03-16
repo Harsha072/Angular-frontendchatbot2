@@ -31,13 +31,20 @@ export class AppComponent {
       filter((s: AuthState) => !!s),
       map((s: AuthState) => s.isAuthenticated ?? false)
     );
-    console.log( "ng onint app componnt",this.isAuthenticated$.subscribe(res=>{
-      console.log(res)
-    }))
-   
+
+    setInterval(() => {
+      this.dataService.userInfo().subscribe(
+        res => console.log('Session is still active'),
+        err => { 
+          this.signOut()
+        }
+      );
+    }, 180000); // Check session expiry every 5 minutes
   }
   
 
+  
+  
  
   public async signIn() : Promise<void> {
     console.log("click sign in::::")
@@ -50,7 +57,7 @@ export class AppComponent {
 
   public async signOut(): Promise<void> {
     console.log("clicking sign out::::::")
-  const timestamp =sessionStorage.getItem('userDetailsStored');
+  const timestamp =localStorage.getItem('userDetailsStored');
   const loginTime = new Date(timestamp ?? 0);
     const logoutTime = new Date();
     
@@ -69,7 +76,7 @@ export class AppComponent {
     console.log("after sign out",res)
     if(res?.Attributes) { 
      
-      sessionStorage.clear()
+      localStorage.clear()
       // check if response is not null or undefined
       await this._oktaAuth.signOut();
     }
