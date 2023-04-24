@@ -62,7 +62,7 @@ export class DataService {
 
   createUser(user: any): Observable<any> {
 
-    return this.http.post<any>(`http://localhost:8080/api/create`, user)
+    return this.http.post<any>(`${environment.apiUrl}/create`, user)
 
   }
   login(user: any): Observable<any> {
@@ -72,29 +72,29 @@ export class DataService {
   }
   logout(user: any): Observable<any> {
     console.log("calling logout")
-    return this.http.post<any>(`http://localhost:8080/api/logout`, user)
+    return this.http.post<any>(`h${environment.apiUrl}/logout`, user)
 
   }
   userInfo():Observable<any>{
-    return this.http.get<any>(`http://localhost:8080/api/userinfo`,{ withCredentials: true })
+    return this.http.get<any>(`${environment.apiUrl}/userinfo`,{ withCredentials: true })
   }
   
   startQuiz(questionIndex: number): Observable<any> {
     console.log("start quiz", questionIndex);
-    return this.http.get<any>(`http://localhost:8080/api/quiz-question/${questionIndex}`);
+    return this.http.get<any>(`${environment.apiUrl}/quiz-question/${questionIndex}`);
   }
 
   getQuizLength(): Observable<any> {
     console.log("get quiz length");
-    return this.http.get<any>(`http://localhost:8080/api/quiz-question`);
+    return this.http.get<any>(`${environment.apiUrl}/quiz-question`);
   }
 prequizScore(score:any):Observable<any>
 {
-  return this.http.post<any>(`http://localhost:8080/api/prequiz`,score);
+  return this.http.post<any>(`${environment.apiUrl}/prequiz`,score);
 } 
 postquizScore(score:any):Observable<any>
 {
-  return this.http.post<any>(`http://localhost:8080/api/postquiz`,score);
+  return this.http.post<any>(`${environment.apiUrl}/postquiz`,score);
 } 
 }
 export interface BotMessage {
