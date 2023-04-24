@@ -47,10 +47,11 @@ export class DataService {
         console.log(response.url)
         // this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
         if (response.url) {
-          this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
-          this.addMessage({ sender: 'Chatbot', text: response.url, isGif: true });
+          console.log("in url::: ",response.url)
+          this.addMessage({ sender: 'Chatbot', text: response.responseMessage,isGif: response.url });
+          // this.addMessage({ sender: 'Chatbot', text: response.url, isGif: true });
         } else {
-          this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
+          this.addMessage({ sender: 'Chatbot', text: response.responseMessage,status:response.status });
         }
       
 
@@ -91,14 +92,18 @@ prequizScore(score:any):Observable<any>
 {
   return this.http.post<any>(`http://localhost:8080/api/prequiz`,score);
 } 
-
+postquizScore(score:any):Observable<any>
+{
+  return this.http.post<any>(`http://localhost:8080/api/postquiz`,score);
+} 
 }
 export interface BotMessage {
   "id": string,
   "responseMessage": string,
   "originalQuery": string,
   "intent": string,
-  "url":string
+  "url":string,
+  "status":string
 }
 export interface Quiz {
   "question": string,

@@ -5,9 +5,9 @@
       <div class="panel" id="chat">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <i class="icon wb-chat-text" aria-hidden="true"></i> PIXIE
+            <i class="icon wb-chat-text" aria-hidden="true"></i>
             <!-- <button style="float: right" routerLink="/prequiz">Take quiz</button> -->
-            <button style="float: right" (click)="navigateToAbout()">Go to About page</button>
+         
           
             
           </h3>
@@ -66,11 +66,21 @@
                         <div class="chat-body">
                           <div class="chat-content">
                             <ng-container *ngIf="message.isGif">
-                              <img src="{{message.text}}" alt="gif">
+                              <img class="animated-gif" *ngIf="message.gifSrc" [src]="message.gifSrc" alt="gif">
+                             <p >
+                              
+                              {{message.text}}
+                            </p>
                             </ng-container>
                             <ng-container *ngIf="!message.isGif">
+                            
                               <p>{{message.text}}</p>
                             </ng-container>
+                            <ng-container *ngIf="prequiz">
+                            
+                              <p>Take the <a routerLink="/postquiz">quiz</a>again</p>
+                            </ng-container>
+                            
                             <time class="chat-time" datetime="2015-07-01T11:39">{{time}}</time>
                           </div>
                         </div>

@@ -20,7 +20,10 @@ export class AppComponent {
   constructor(private _router: Router, private _oktaStateService: OktaAuthStateService, 
      @Inject(OKTA_AUTH) private _oktaAuth: OktaAuth,private dataService:DataService) {
       console.log("constructore in app component:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::") 
-      console.log("in constructore::: ",sessionStorage.getItem('userDetailsStored'))
+      console.log("in constructore::: ",localStorage.getItem('userDetailsStored'))
+      if(localStorage.getItem('userDetailsStored')){
+        localStorage.clear()
+      }
      
     }
 
@@ -32,14 +35,14 @@ export class AppComponent {
       map((s: AuthState) => s.isAuthenticated ?? false)
     );
 
-    setInterval(() => {
-      this.dataService.userInfo().subscribe(
-        res => console.log('Session is still active'),
-        err => { 
-          this.signOut()
-        }
-      );
-    }, 180000); // Check session expiry every 5 minutes
+    // setInterval(() => {
+    //   this.dataService.userInfo().subscribe(
+    //     res => console.log('Session is still active'),
+    //     err => { 
+    //       this.signOut()
+    //     }
+    //   );
+    // }, 180000); // Check session expiry every 5 minutes
   }
   
 
@@ -59,6 +62,7 @@ export class AppComponent {
     console.log("clicking sign out::::::")
   const timestamp =localStorage.getItem('userDetailsStored');
   const loginTime = new Date(timestamp ?? 0);
+  console.log("login time::: ",loginTime)
     const logoutTime = new Date();
     
     const sessionDuration = (logoutTime.getTime() - loginTime.getTime()) / 1000;

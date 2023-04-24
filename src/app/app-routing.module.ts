@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { OktaAuthGuard, OktaCallbackComponent } from '@okta/okta-angular';
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { PostQuizComponent } from './post-quiz/post-quiz.component';
 
 import { PreQuizComponent } from './pre-quiz/pre-quiz.component'; 
-import { RegisterComponent } from './register/register.component';
+
 
 
 const routes: Routes = [
@@ -15,9 +17,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'chat', component: ChatComponent , canActivate:[OktaAuthGuard]},
   { path: 'prequiz', component: PreQuizComponent, canActivate:[OktaAuthGuard] },
+  { path: 'feedback', component: FeedbackComponent, canActivate:[OktaAuthGuard] },
+  { path: 'postquiz', component: PostQuizComponent, canActivate:[OktaAuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'login/callback', component: OktaCallbackComponent },
-  { path: 'register', component: RegisterComponent },
+ 
   // { path: '', component: HomeComponent, pathMatch: 'full' },
   
 ];

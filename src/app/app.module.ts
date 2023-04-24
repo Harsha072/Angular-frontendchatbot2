@@ -15,11 +15,14 @@ import {MatButtonModule} from '@angular/material/button';
 import { PreQuizComponent } from './pre-quiz/pre-quiz.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+
 import { HomeComponent } from './home/home.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import OktaAuth from '@okta/okta-auth-js';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
+import { PostQuizComponent } from './post-quiz/post-quiz.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-21147924.okta.com/oauth2/default',
   clientId: '0oa8hhf2xrNtfp6AT5d7',
@@ -33,8 +36,11 @@ const oktaAuth = new OktaAuth({
     PreQuizComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent,
     HomeComponent,
+    PostQuizComponent,
+    FeedbackComponent,
+  
+  
   
   ],
   imports: [

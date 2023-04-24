@@ -19,6 +19,7 @@ export class ChatComponent implements AfterViewChecked{
   inputValue!: string;
   options:any
   time:string
+  prequiz:Boolean=false;
 
  
 
@@ -41,9 +42,7 @@ export class ChatComponent implements AfterViewChecked{
     this.introduce({name:'Welcome',message:'hi'})
  
   }
-  navigateToAbout() {
-    this.router.navigate(['/prequiz']);
-  }
+
 
   ngAfterViewChecked() {
     console.log("calling bottom")
@@ -77,8 +76,25 @@ export class ChatComponent implements AfterViewChecked{
     this.dataService.currentMessages.subscribe(response => {
       setTimeout(() => {
         console.log("send user::: ",response)
-         this.messages = response
-        
+        this.messages = response
+        if(!this.messages[this.messages.length-1].status){
+          this.messages = response
+         if (this.messages[this.messages.length-1].isGif) {
+          const message = this.messages[this.messages.length-1];
+          if(message.isGif==='intro'){
+            message.gifSrc = `assets/gif/dev.gif`;
+          }
+          else if(message.isGif==='startVariables'){
+            message.gifSrc = `assets/gif/boxes.gif`;
+          }
+         
+        }
+        }
+        else{
+         this.prequiz=true
+          
+        }
+         
        this.inputValue=''
       }, 1000);
      

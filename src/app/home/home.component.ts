@@ -78,6 +78,7 @@ export class HomeComponent implements OnInit {
        };
        localStorage.setItem('userDetailsStored', loginDateString)
        this.dataService.login(userInfo).subscribe((res) => {
+        console.log("the res ",res)
          console.log(res.loginTime);
          localStorage.setItem('userDetailsStored', res.loginTime);
          console.log(localStorage.getItem('userDetailsStored'))

@@ -189,6 +189,10 @@
       color: black;
       background-color: white;
   }
+  img.animated-gif{
+    width: 200px;
+    height: auto;
+  }
   
   .chat-left .chat-content:before {
       right: auto;

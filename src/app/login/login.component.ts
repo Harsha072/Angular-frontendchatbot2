@@ -30,7 +30,7 @@ export class LoginComponent  implements OnInit{
   public async signIn(): Promise<void> {
     console.log("click sign in::::")
     await this._oktaAuth.signInWithRedirect().then(
-      _ => this.router.navigate(['/register'])
+      
     );
     console.log( this.isAuthenticated$)
     

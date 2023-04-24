@@ -1,61 +1,61 @@
- <!-- creating a modal for when quiz ends -->
+<div class="modal-container" *ngIf="showModal">
+  
+  <div class="modal-content-container">
+    <h1>Congratulations, Quiz Completed.</h1>
 
- <div class="modal-container" *ngIf="showModal">
-  
-    <div class="modal-content-container">
-      <h1>Congratulations, Quiz Completed.</h1>
-  
-      <div class="grade-details">
-        <p>Wrong Answers:{{answeredWrongly}} </p>
-        <p>Right Answers: {{answeredCorrectly}} </p>
-        <p>Unanswered: {{unanswered}}</p>
-        <p>Time Taken: {{resultTime}} </p>
-        <p>Points: {{points}}</p>
-      </div>
-  
-      <div class="modal-button-container">
-        <button (click)="navigateToAbout()" >Continue</button>
-      </div>
+    <div class="grade-details">
+      <p>Wrong Answers:{{answeredWrongly}} </p>
+      <p>Right Answers: {{answeredCorrectly}} </p>
+      <p>Unanswered: {{unanswered}}</p>
+      <p>Time Taken: {{resultTime}} </p>
+      <p>Points: {{points}}</p>
+    </div>
+
+    <div class="modal-button-container">
+      <p>Why dont you try learning Javascript from a chatbot Robbie! See if that improves the score</p>
+      <button (click)="navigateToChatbot()" >Try Robbie</button>
     </div>
   </div>
+</div>
 <!-- end of modal of quiz details-->
 <main><div class="game-quiz-container">
 
-    <div class="game-details-container">
-      
-        <h1>Question: <span id="question-number">{{ currentQuestion }}</span> / {{ questionLength }}</h1>
-        <div class="countdown-container">
-            <span> <h1>Time Remaining: {{ countdown }}</h1></span>
-          </div>
-    </div>
+  <div class="game-details-container">
     
+      <h1>Question: <span id="question-number">{{ currentQuestion }}</span> / {{ questionLength }}</h1>
+      <div class="countdown-container">
+          <span> <h1>Time Remaining: {{ countdown }}</h1></span>
+        </div>
+  </div>
+  
 
-    <div class="game-question-container">
-        <h1 id="display-question" >{{question}}</h1>
-    </div>
+  <div class="game-question-container">
+      <h1 id="display-question" >{{question}}</h1>
+  </div>
 
-    <div class="game-options-container">
+  <div class="game-options-container">
 
-       <div *ngIf="pickOptionsModal" class="modal-container" id="option-modal">
+     <div *ngIf="pickOptionsModal" class="modal-container" id="option-modal">
 
-            <div class="modal-content-container">
-                 <h1>Please Pick An Option</h1>
+          <div class="modal-content-container">
+               <h1>Please Pick An Option</h1>
 
-                 <div class="modal-button-container">
-                    <button onclick="closeOptionModal()">Continue</button>
-                </div>
+               <div class="modal-button-container">
+                  <button onclick="closeOptionModal()">Continue</button>
+              </div>
 
-            </div>
+          </div>
 
-       </div>
-      <span *ngFor="let option of options; let i = index">
-        <input type="radio" name="selectedOption" [id]="'option'+i" [value]="option" (change)="onOptionSelected(i)" />
-        <label [ngClass]="{'correct': selectedOptionIndex === i && selectedOptionClass === 'correct', 'wrong': selectedOptionIndex === i && selectedOptionClass === 'wrong'}" [for]="'option'+i">{{option}}</label>
-      </span>
-    </div>
+     </div>
+    <span *ngFor="let option of options; let i = index">
+      
+      <input type="radio" name="selectedOption" [id]="'option'+i" [value]="option" (change)="onOptionSelected(i)" />
+      <label [ngClass]="{'correct': selectedOptionIndex === i && selectedOptionClass === 'correct', 'wrong': selectedOptionIndex === i && selectedOptionClass === 'wrong'}" [for]="'option'+i">{{option}}</label>
+    </span>
+  </div>
 
-    <!-- <div class="next-button-container">
-        <button (click)="handleNextQuestion()">Next Question</button>
-    </div> -->
+  <!-- <div class="next-button-container">
+      <button (click)="handleNextQuestion()">Next Question</button>
+  </div> -->
 
 </div></main>

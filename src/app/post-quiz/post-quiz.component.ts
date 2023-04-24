@@ -1,3 +1,4 @@
+
 import { Component, Inject } from '@angular/core';
 import { DataService } from '../service';
 import { Quiz } from '../service';
@@ -7,12 +8,13 @@ import OktaAuth from '@okta/okta-auth-js';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
-  selector: 'app-pre-quiz',
-  templateUrl: './pre-quiz.component.html',
-  styleUrls: ['./pre-quiz.component.css']
+  selector: 'app-post-quiz',
+  templateUrl: './post-quiz.component.html',
+  styleUrls: ['./post-quiz.component.css']
 })
-export class PreQuizComponent {
+export class PostQuizComponent {
 
   message: string | undefined
   question!: string;
@@ -51,7 +53,7 @@ export class PreQuizComponent {
 
   console.log("next question ::::",this.next)
    this.startQuiz(this.next)
-    console.log("prequiz:::::")
+    console.log("post quizz:::::")
     this.dataService.getQuizLength().subscribe(response => {
       console.log("ng on init ", response)
       this.questionLength = response.length
@@ -73,7 +75,7 @@ export class PreQuizComponent {
 
  
   navigateToChatbot() {
-    this.router.navigate(['/chat']);
+    this.router.navigate(['/feedback']);
   }
 
 
@@ -199,7 +201,7 @@ export class PreQuizComponent {
         totalTimeTaken:this.totalTimeTaken,
         timeStamp:timeStamp
       }
-      this.dataService.prequizScore(score).subscribe((res) => {
+      this.dataService.postquizScore(score).subscribe((res) => {
         clearInterval(this.countdownInterval);
      },
      (error) => {
@@ -213,3 +215,4 @@ export class PreQuizComponent {
   }
 
 }
+

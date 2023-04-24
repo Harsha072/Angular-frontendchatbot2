@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
   public async signIn(): Promise<void> {
     console.log("click sign in: changed:::")
     await this._oktaAuth.signInWithRedirect().then(
-      _ => this.router.navigate(['/register'])
+      
     );
    
     
