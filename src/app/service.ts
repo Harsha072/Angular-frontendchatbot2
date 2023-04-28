@@ -68,7 +68,6 @@ export class DataService {
   login(user: any): Observable<any> {
     console.log("calling login",user)
     return this.http.post<any>(`https://9tbppxc74a.execute-api.us-east-1.amazonaws.com/dev/api/harsha`, user)
-
   }
   logout(user: any): Observable<any> {
     console.log("calling logout")
