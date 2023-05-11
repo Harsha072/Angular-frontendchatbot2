@@ -65,9 +65,14 @@ export class DataService {
     return this.http.post<any>(`${environment.apiUrl}/create`, user)
 
   }
+  // login(user: any): Observable<any> {
+  //   console.log("calling login new",user)
+  //   return this.http.post<any>(`${environment.apiUrl}/harsha`, user)
+    
+  // }
   login(user: any): Observable<any> {
     console.log("calling login new",user)
-    return this.http.post<any>(`${environment.apiUrl}/login`, user)
+    return this.http.post<any>(`http://localhost:8080/api/harsha`, user)
     
   }
   logout(user: any): Observable<any> {
