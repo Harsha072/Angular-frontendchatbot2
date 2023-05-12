@@ -66,8 +66,8 @@ export class DataService {
 
   }
   login(user: any): Observable<any> {
-    console.log("calling login new",user,environment.apiUrl )
-    return this.http.post<any>(`${environment.apiUrl}/harsha`, user,{ withCredentials: true })
+    console.log("calling login new harsha",user,environment.apiUrl )
+    return this.http.post<any>(`${environment.apiUrl}/harsha`, user)
     
   }
   // login(user: any): Observable<any> {
