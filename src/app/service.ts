@@ -82,7 +82,7 @@ export class DataService {
   // }
   logout(user: any): Observable<any> {
     console.log("calling logout chaheged ")
-    return this.http.post<any>(`http://localhost:8080/api/logout`, user,{ withCredentials: true })
+    return this.http.post<any>(`http://localhost:8080/api/logout`, user)
 
   }
   userInfo():Observable<any>{
