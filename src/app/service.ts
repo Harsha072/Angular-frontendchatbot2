@@ -65,26 +65,26 @@ export class DataService {
     return this.http.post<any>(`${environment.apiUrl}/create`, user)
 
   }
-  // login(user: any): Observable<any> {
-  //   console.log("calling login new harsha check login",user,environment.apiUrl )
-  //   return this.http.post<any>(`${environment.apiUrl}/login`, user,{ withCredentials: true })
-    
-  // }
   login(user: any): Observable<any> {
-    console.log("calling login new",user)
-    return this.http.post<any>(`http://localhost:8080/api/login`, user)
+    console.log("calling login new harsha check login",user,environment.apiUrl )
+    return this.http.post<any>(`${environment.apiUrl}/login`, user,{ withCredentials: true })
     
   }
-  // logout(user: any): Observable<any> {
-  //   console.log("calling logout chaheged ")
-  //   return this.http.post<any>(`${environment.apiUrl}/logout`, user,{ withCredentials: true })
-
+  // login(user: any): Observable<any> {
+  //   console.log("calling login new",user)
+  //   return this.http.post<any>(`http://localhost:8080/api/login`, user)
+    
   // }
   logout(user: any): Observable<any> {
     console.log("calling logout chaheged ")
-    return this.http.post<any>(`http://localhost:8080/api/logout`, user)
+    return this.http.post<any>(`${environment.apiUrl}/logout`, user,{ withCredentials: true })
 
   }
+  // logout(user: any): Observable<any> {
+  //   console.log("calling logout chaheged ")
+  //   return this.http.post<any>(`http://localhost:8080/api/logout`, user)
+
+  // }
   userInfo():Observable<any>{
     return this.http.get<any>(`${environment.apiUrl}/userinfo`,{ withCredentials: true })
   }
