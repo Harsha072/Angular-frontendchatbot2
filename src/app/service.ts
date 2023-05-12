@@ -76,7 +76,7 @@ export class DataService {
     
   // }
   logout(user: any): Observable<any> {
-    console.log("calling logout chaheged ")
+    console.log("calling logout chaheged new ",environment.apiUrl)
     return this.http.post<any>(`${environment.apiUrl}/logout`, user,{ withCredentials: true })
 
   }
