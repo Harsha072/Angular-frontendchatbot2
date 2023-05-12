@@ -67,7 +67,7 @@ export class DataService {
   }
   login(user: any): Observable<any> {
     console.log("calling login new harsha check login",user,environment.apiUrl )
-    return this.http.post<any>(`${environment.apiUrl}/requestText`, user)
+    return this.http.post<any>(`${environment.apiUrl}/login`, user)
     
   }
   // login(user: any): Observable<any> {
