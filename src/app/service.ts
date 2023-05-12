@@ -80,14 +80,14 @@ export class DataService {
   userInfo():Observable<any>{
     return this.http.get<any>(`${environment.apiUrl}/userinfo`,{ withCredentials: true })
   }
-  startQuiz(questionIndex: number): Observable<any> {
-    console.log("start quiz", questionIndex);
-    return this.http.get<any>(`http://localhost:8080/api/quiz-question/${questionIndex}`);
-  }
   // startQuiz(questionIndex: number): Observable<any> {
   //   console.log("start quiz", questionIndex);
-  //   return this.http.get<any>(`${environment.apiUrl}/quiz-question/${questionIndex}`);
+  //   return this.http.get<any>(`http://localhost:8080/api/quiz-question/${questionIndex}`);
   // }
+  startQuiz(questionIndex: number): Observable<any> {
+    console.log("start quiz", questionIndex);
+    return this.http.get<any>(`${environment.apiUrl}/quiz-question/${questionIndex}`);
+  }
 
   getQuizLength(): Observable<any> {
     console.log("get quiz length");
