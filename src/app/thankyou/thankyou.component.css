@@ -1,0 +1,8 @@
+.container {
+    background-color: teal;
+    position: relative;
+    z-index: 1; /* make sure the text is on top of the overlay */
+  }
+  .introduction-container {
+      color: #fff;
+    }

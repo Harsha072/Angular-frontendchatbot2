@@ -73,7 +73,7 @@ export class PreQuizComponent {
 
  
   navigateToChatbot() {
-    this.router.navigate(['/chat']);
+    this.router.navigate(['/feedback']);
   }
 
 

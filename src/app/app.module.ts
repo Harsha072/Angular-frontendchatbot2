@@ -22,6 +22,10 @@ import OktaAuth from '@okta/okta-auth-js';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { PostQuizComponent } from './post-quiz/post-quiz.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { NavigateToChatComponent } from './navigate-to-chat/navigate-to-chat.component';
+import { PostfeedbackComponent } from './postfeedback/postfeedback.component';
+import { ThankyouComponent } from './thankyou/thankyou.component';
+
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-21147924.okta.com/oauth2/default',
@@ -39,6 +43,10 @@ const oktaAuth = new OktaAuth({
     HomeComponent,
     PostQuizComponent,
     FeedbackComponent,
+    NavigateToChatComponent,
+    PostfeedbackComponent,
+    ThankyouComponent,
+ 
   
   
   

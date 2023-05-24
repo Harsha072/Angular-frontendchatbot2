@@ -43,15 +43,41 @@ export class DataService {
     this.http.post<BotMessage>(`${environment.apiUrl}/requestText/`, this.message)
       .subscribe(response => {
         console.log(response);
-        console.log(response.responseMessage)
+        console.log(response.responseMessage.length)
         console.log(response.url)
         // this.addMessage({ sender: 'Chatbot', text: response.responseMessage });
         if (response.url) {
           console.log("in url::: ",response.url)
-          this.addMessage({ sender: 'Chatbot', text: response.responseMessage,isGif: response.url });
+          let message = response.responseMessage;
+          if (message.length > 50) {
+            const sentences = message.match(/[^\.!\?]+[\.!\?]+/g);
+            if (sentences) {
+              sentences.forEach((sentence) => {
+                this.addMessage({ sender: 'Chatbot', text: sentence, status: response.status });
+              });
+            } else {
+              this.addMessage({ sender: 'Chatbot', text: message, status: response.status });
+            }
+          } else {
+            this.addMessage({ sender: 'Chatbot', text: message, status: response.status });
+          }
+          // this.addMessage({ sender: 'Chatbot', text: response.responseMessage,isGif: response.url });
           // this.addMessage({ sender: 'Chatbot', text: response.url, isGif: true });
         } else {
-          this.addMessage({ sender: 'Chatbot', text: response.responseMessage,status:response.status });
+          // this.addMessage({ sender: 'Chatbot', text: response.responseMessage,status:response.status });
+          let message = response.responseMessage;
+          if (message.length > 50) {
+            const sentences = message.match(/[^\.!\?]+[\.!\?]+/g);
+            if (sentences) {
+              sentences.forEach((sentence) => {
+                this.addMessage({ sender: 'Chatbot', text: sentence, status: response.status });
+              });
+            } else {
+              this.addMessage({ sender: 'Chatbot', text: message, status: response.status });
+            }
+          } else {
+            this.addMessage({ sender: 'Chatbot', text: message, status: response.status });
+          }
         }
       
 

@@ -75,7 +75,7 @@ export class PostQuizComponent {
 
  
   navigateToChatbot() {
-    this.router.navigate(['/feedback']);
+    this.router.navigate(['/postfeedback']);
   }
 
 
