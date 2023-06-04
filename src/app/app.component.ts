@@ -66,14 +66,15 @@ export class AppComponent {
     const logoutTime = new Date();
     
     const sessionDuration = (logoutTime.getTime() - loginTime.getTime()) / 1000;
-    console.log(`Session duration: ${sessionDuration/60} minutes`);
+    // console.log(`Session duration: ${sessionDuration/60} minutes`);
+    const formattedDuration = (sessionDuration / 60).toFixed(1);
     this._oktaAuth.getUser().then((user)=>{
       const userInfo ={
          username:user.name,
          email:user.email,
          loginTime:sessionStorage.getItem('userDetailsStored') ,
          totalLogin:1,
-         sessionDuration: `${sessionDuration/60} minutes`
+         sessionDuration: `${formattedDuration} minutes`
       }
      
    this.dataService.logout(userInfo).subscribe(async (res) => {
