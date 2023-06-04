@@ -29,7 +29,7 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
 
 const oktaAuth = new OktaAuth({
   issuer: 'https://dev-21147924.okta.com/oauth2/default',
-  clientId: '0oa8hhf2xrNtfp6AT5d7',
+  clientId: '0oa9tocdy5Ifu88aA5d7',
   redirectUri: window.location.origin+'/login/callback'
 });
 
