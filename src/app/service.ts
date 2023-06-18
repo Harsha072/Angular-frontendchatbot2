@@ -49,8 +49,11 @@ export class DataService {
         if (response.url) {
           console.log("in url::: ",response.url)
           let message = response.responseMessage;
+          console.log("the message ", response.responseMessage);
           if (message.length > 50) {
+            console.log("the message ",message)
             const sentences = message.match(/[^\.!\?]+[\.!\?]+/g);
+            console.log("the sentence ",sentences)
             if (sentences) {
               sentences.forEach((sentence) => {
                 this.addMessage({ sender: 'Chatbot', text: sentence, status: response.status });
