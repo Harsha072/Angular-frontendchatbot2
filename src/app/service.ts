@@ -49,7 +49,7 @@ export class DataService {
         if (response.url) {
           console.log("in url::: ",response.url)
           let message = response.responseMessage;
-          console.log("the message ", response.responseMessage);
+          console.log("the messagev  ", response.responseMessage);
           if (message.length > 50) {
             console.log("the message ",message)
             const sentences = message.match(/[^\.!\?]+[\.!\?]+/g);
